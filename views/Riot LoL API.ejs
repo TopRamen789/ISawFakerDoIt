@@ -1,0 +1,73 @@
+<html>
+<head>
+	<script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.3.0/Chart.min.js"></script>
+	<!--<script src="javascripts/APIDataRetrieval.js"></script>-->
+	<script src="javascripts/VisualizationTools.js"></script>
+	<script src="javascripts/APIDataHandler.js"></script>
+	<script src="javascripts/APIOperations.js"></script>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+</head>
+<body>
+	<div class="container">
+		<div class="page-header">
+			<h1>Team Gold</h1>
+		</div>
+		<canvas id="cvs" height="300" width="1000"></canvas>
+		<canvas id="cvs2" height="300" width="1000"></canvas>
+		<div class="page-header">
+			<h1>Top Lane Analysis: Bromo vs TopRamen</h1>
+		</div>
+		<div class="page-header">
+			<h2>Team Blue's Kills on TopRamen</h2>
+		</div>
+		<canvas id="cvsTeamBlue" height="300" width="1000"></canvas>
+		<div class="page-header">
+			<h2>Bromo's Solo Kills on TopRamen</h2>
+		</div>
+		<canvas id="cvsTopLane" height="300" width="1000"></canvas>
+		<br/>
+	</div>
+</body>
+<script type="text/javascript">
+	//Remember to maintain your rate of 10 per second
+
+	/*
+	Last ARAM I played with Ralph/Steph/Yuki/Rimash
+	http://matchhistory.na.leagueoflegends.com/en/#match-details/NA1/2342518499/36883968?tab=overview 
+	*/
+
+	/*
+	Last ranked solo queue game I played
+	http://matchhistory.na.leagueoflegends.com/en/#match-details/NA1/2224617734?tab=overview
+	*/
+	
+	//Feels like I should create an object from the APIDataRetrieval and then use it's data from there
+	//instead of making numerous API calls...
+
+	//APIOperations.getSummonerInfo('TopRamen789');
+	//APIOperations.getSummonerMatchList('22935170');
+	//APIOperations.getMatch('2224617734');
+
+	//APIOperations.getMatchWithTimeline('2224617734', 'displayStringifiedAPIData');
+	//APIOperations.getMatchWithTimeline('2224617734', 'logAPIData');
+
+	//Seems like, most of the data handling I'll be doing WILL be on the match timeline...
+	APIOperations.getMatchWithTimeline('2224617734', 'createNewChart');
+	//APIOperations.getMatchWithTimeline('2224617734', 'logAPIData');
+	APIOperations.getMatchWithTimeline('2224617734', 'determineWinnerOfTopLane');
+	//APIDataHandler.handler('v2.2/match/2224617734?includeTimeline=true', 'test');
+</script>
+</html>
+<!--
+Looks like they do imgs via ddragon.leagueoflegends.com
+
+Most look pretty straightforward, runes you'll have to look up
+and masteries are another story...
+
+This is what they did for greyed out masteries:
+<div class="img img-gray" style="height:48px; width:48px; background: url('//ddragon.leagueoflegends.com/cdn/6.22.1/img/sprite/gray_mastery0.png') -96px -48px no-repeat;" data-rg-id="6162" data-rg-name="mastery"></div>
+
+and non greyed out:
+<div class="img " style="height:48px; width:48px; background: url('//ddragon.leagueoflegends.com/cdn/6.22.1/img/sprite/mastery0.png') -144px -48px no-repeat;" data-rg-id="6164" data-rg-name="mastery"></div>
+-->
